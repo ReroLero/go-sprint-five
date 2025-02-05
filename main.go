@@ -111,15 +111,7 @@ func (r Running) Calories() float64 {
 // TrainingInfo возвращает структуру InfoMessage с информацией о проведенной тренировке.
 // Это переопределенный метод TrainingInfo() из Training.
 func (r Running) TrainingInfo() InfoMessage {
-	// вставьте ваш код ниже
-	// нужно вернуть вызов такого же метода TrainingInfo(), только для структуры Training{}. Вспомните, как вызывать методы встроенной структуры
-	return InfoMessage{
-		TrainingType: r.TrainingType,
-		Duration:     r.Duration,
-		Distance:     r.distance(),
-		Speed:        r.meanSpeed(),
-		Calories:     r.Calories(),
-	}
+	return r.Training.TrainingInfo()
 }
 
 // Константы для расчета потраченных килокалорий при ходьбе.
@@ -144,21 +136,14 @@ type Walking struct {
 func (w Walking) Calories() float64 {
 	// вставьте ваш код ниже
 	//((CaloriesWeightMultiplier * вес_спортсмена_в_кг + (средняя_скорость_в_метрах_в_секунду**2 / рост_в_метрах) * CaloriesSpeedHeightMultiplier * вес_спортсмена_в_кг) * время_тренировки_в_часах * MinsInHour)
-	return (CaloriesWeightMultiplier*w.Weight + ((math.Pow(w.meanSpeed())*KmHInMsec)/(w.Height*CaloriesSpeedHeightMultiplier))*CaloriesSpeedHeightMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
+	return (CaloriesWeightMultiplier*w.Weight + (math.Pow(w.meanSpeed(), 2)/w.Height)*CaloriesSpeedHeightMultiplier*w.Weight) * w.Duration.Hours() * MinInHours
 }
 
 // TrainingInfo возвращает структуру InfoMessage с информацией о проведенной тренировке.
 // Это переопределенный метод TrainingInfo() из Training.
+
 func (w Walking) TrainingInfo() InfoMessage {
-	// вставьте ваш код ниже
-	//нужно вернуть вызов такого же метода TrainingInfo(), только для структуры Training{}. Вспомните, как вызывать методы встроенной структуры
-	return InfoMessage{
-		TrainingType: w.TrainingType,
-		Duration:     w.Duration,
-		Distance:     w.distance(),
-		Speed:        w.meanSpeed(),
-		Calories:     w.Calories(),
-	}
+	return w.Training.TrainingInfo()
 }
 
 // Константы для расчета потраченных килокалорий при плавании.
