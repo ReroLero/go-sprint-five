@@ -81,14 +81,14 @@ func (i InfoMessage) String() string {
 // CaloriesCalculator интерфейс для структур: Running, Walking и Swimming.
 type CaloriesCalculator interface {
 	// добавьте необходимые методы в интерфейс
-	func (t Training) Calories() float64 {
+	func (t Training) Calories() float64{
 		// вставьте ваш код ниже
-		Calories()
+		return Calories()
 	}
 
 	func (t Training) TrainingInfo() InfoMessage {
 		// вставьте ваш код ниже
-		TrainingInfo()
+		return TrainingInfo()
 	}
 }
 
